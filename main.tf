@@ -90,6 +90,7 @@ data "kubernetes_service" "prometheus-server" {
 
 # some local variables to clean up output
 locals {
+
   ######### grafana ##############################
   grafana_ip = try(
     data.kubernetes_service.grafana.status.0.load_balancer.0.ingress.0.ip,
