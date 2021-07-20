@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.2
+
+🔧 Fixes:
+
+- Fixed wait commands to use the variable namespace
+
+  ([PR #2](https://github.com/srb3/terraform-kubernetes-kuma-metrics/pull/2))
+
 ## 0.0.1
 
 🆕 New features:

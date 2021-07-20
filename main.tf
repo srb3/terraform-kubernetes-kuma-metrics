@@ -32,11 +32,11 @@ resource "null_resource" "execute_kuma_metrics_install" {
   }
 
   provisioner "local-exec" {
-    command = "while [[ $(kubectl get pods -l app=prometheus,component=server -n kuma-metrics -o 'jsonpath={..status.conditions[?(@.type==\"Ready\")].status}') != 'True' ]]; do echo 'waiting for prometheus server to enter ready state'; sleep 1; done"
+    command = "while [[ $(kubectl get pods -l app=prometheus,component=server -n ${var.namespace} -o 'jsonpath={..status.conditions[?(@.type==\"Ready\")].status}') != 'True' ]]; do echo 'waiting for prometheus server to enter ready state'; sleep 1; done"
   }
 
   provisioner "local-exec" {
-    command = "while [[ $(kubectl get pods -l app=prometheus,component=kube-state-metrics -n kuma-metrics -o 'jsonpath={..status.conditions[?(@.type==\"Ready\")].status}') != 'True' ]]; do echo 'waiting for kube state metrics to enter ready state'; sleep 1; done"
+    command = "while [[ $(kubectl get pods -l app=prometheus,component=kube-state-metrics -n ${var.namespace} -o 'jsonpath={..status.conditions[?(@.type==\"Ready\")].status}') != 'True' ]]; do echo 'waiting for kube state metrics to enter ready state'; sleep 1; done"
   }
 }
 
