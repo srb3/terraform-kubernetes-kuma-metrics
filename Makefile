@@ -1,5 +1,7 @@
 .PHONY: all build test clean
 
+SHELL = /bin/bash
+
 all: build test
 
 build: build_prep build_platform
@@ -9,12 +11,12 @@ build_prerequisites:
 	kumactl install metrics | sed 's/name: kuma-metrics/name: $${namespace}/'  > templates/metrics.yaml
 
 build_prep:
-	pushd examples/default; \
+	@pushd examples/default; \
 	terraform init; \
 	popd
 
 build_platform:
-	pushd examples/default; \
+	@pushd examples/default; \
 	terraform apply -auto-approve; \
 	popd
 
@@ -24,7 +26,6 @@ test_deployment:
 	@echo "Testing"
 
 clean:
-	@echo "Cleaning up...."
-	pushd examples/default; \
+	@pushd examples/default; \
 	terraform destroy -auto-approve; \
 	popd
